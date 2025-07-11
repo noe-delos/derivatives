@@ -175,6 +175,3 @@ media/
 # Supabase specific
 supabase/.env
 supabase/.temp
-
-# PNPM
-pnpm-lock.yaml*
