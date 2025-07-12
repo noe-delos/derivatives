@@ -3,24 +3,34 @@
 
 /* DIN Next Rounded LT W01 Regular Font */
 @font-face {
-    font-family: "DIN Next Rounded";
-    src: url("https://db.onlinewebfonts.com/t/ab596f21664c5582567537d241e2a53e.eot");
-    src: url("https://db.onlinewebfonts.com/t/ab596f21664c5582567537d241e2a53e.eot?#iefix")format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/ab596f21664c5582567537d241e2a53e.woff2")format("woff2"),
-    url("https://db.onlinewebfonts.com/t/ab596f21664c5582567537d241e2a53e.woff")format("woff"),
-    url("https://db.onlinewebfonts.com/t/ab596f21664c5582567537d241e2a53e.ttf")format("truetype"),
-    url("https://db.onlinewebfonts.com/t/ab596f21664c5582567537d241e2a53e.svg#DIN Next Rounded LT W01 Regular")format("svg");
+  font-family: "DIN Next Rounded";
+  src: url("https://db.onlinewebfonts.com/t/ab596f21664c5582567537d241e2a53e.eot");
+  src: url("https://db.onlinewebfonts.com/t/ab596f21664c5582567537d241e2a53e.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/ab596f21664c5582567537d241e2a53e.woff2")
+      format("woff2"),
+    url("https://db.onlinewebfonts.com/t/ab596f21664c5582567537d241e2a53e.woff")
+      format("woff"),
+    url("https://db.onlinewebfonts.com/t/ab596f21664c5582567537d241e2a53e.ttf")
+      format("truetype"),
+    url("https://db.onlinewebfonts.com/t/ab596f21664c5582567537d241e2a53e.svg#DIN Next Rounded LT W01 Regular")
+      format("svg");
 }
 
 /* Feather Bold Font */
 @font-face {
-    font-family: "Feather Bold";
-    src: url("https://db.onlinewebfonts.com/t/14936bb7a4b6575fd2eee80a3ab52cc2.eot");
-    src: url("https://db.onlinewebfonts.com/t/14936bb7a4b6575fd2eee80a3ab52cc2.eot?#iefix")format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/14936bb7a4b6575fd2eee80a3ab52cc2.woff2")format("woff2"),
-    url("https://db.onlinewebfonts.com/t/14936bb7a4b6575fd2eee80a3ab52cc2.woff")format("woff"),
-    url("https://db.onlinewebfonts.com/t/14936bb7a4b6575fd2eee80a3ab52cc2.ttf")format("truetype"),
-    url("https://db.onlinewebfonts.com/t/14936bb7a4b6575fd2eee80a3ab52cc2.svg#Feather Bold")format("svg");
+  font-family: "Feather Bold";
+  src: url("https://db.onlinewebfonts.com/t/14936bb7a4b6575fd2eee80a3ab52cc2.eot");
+  src: url("https://db.onlinewebfonts.com/t/14936bb7a4b6575fd2eee80a3ab52cc2.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/14936bb7a4b6575fd2eee80a3ab52cc2.woff2")
+      format("woff2"),
+    url("https://db.onlinewebfonts.com/t/14936bb7a4b6575fd2eee80a3ab52cc2.woff")
+      format("woff"),
+    url("https://db.onlinewebfonts.com/t/14936bb7a4b6575fd2eee80a3ab52cc2.ttf")
+      format("truetype"),
+    url("https://db.onlinewebfonts.com/t/14936bb7a4b6575fd2eee80a3ab52cc2.svg#Feather Bold")
+      format("svg");
 }
 
 @custom-variant dark (&:is(.dark *));
@@ -140,20 +150,25 @@
   }
   body {
     @apply bg-background text-foreground font-sans;
-    word-spacing: -0.1em;
   }
-  
+
   /* Apply DIN Next Rounded to all headings and titles */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: "DIN Next Rounded", ui-sans-serif, system-ui, sans-serif;
     font-weight: 600;
-    word-spacing: -0.15em;
   }
-  
+
   /* Apply to specific UI elements */
-  .card-title, .dialog-title, .button, .nav-item {
+  .card-title,
+  .dialog-title,
+  .button,
+  .nav-item {
     font-family: "DIN Next Rounded", ui-sans-serif, system-ui, sans-serif;
-    word-spacing: -0.1em;
   }
 }
 
@@ -161,28 +176,66 @@
   /* Utility classes for DIN Next Rounded fonts */
   .font-din {
     font-family: "DIN Next Rounded", ui-sans-serif, system-ui, sans-serif;
-    word-spacing: -0.1em;
   }
-  
+
   .font-din-medium {
     font-family: "DIN Next Rounded", ui-sans-serif, system-ui, sans-serif;
     font-weight: 500;
-    word-spacing: -0.1em;
   }
-  
+
   .font-din-semibold {
     font-family: "DIN Next Rounded", ui-sans-serif, system-ui, sans-serif;
     font-weight: 600;
-    word-spacing: -0.15em;
   }
-  
+
   .font-din-bold {
     font-family: "DIN Next Rounded", ui-sans-serif, system-ui, sans-serif;
     font-weight: 700;
-    word-spacing: -0.12em;
   }
-  
+
   .shadow-soft {
     @apply shadow-[0px_4px_30px_0px_rgba(0,_0,_0,_0.04)];
+  }
+
+  /* Custom scrollbar styles - thinner, light gray, and rounded */
+  .scrollbar-thin,
+  [data-radix-scroll-area-viewport] {
+    /* Webkit browsers (Chrome, Safari, Edge) */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar,
+  [data-radix-scroll-area-viewport]::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track,
+  [data-radix-scroll-area-viewport]::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb,
+  [data-radix-scroll-area-viewport]::-webkit-scrollbar-thumb {
+    background: rgba(156, 163, 175, 0.5);
+    border-radius: 3px;
+    border: none;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover,
+  [data-radix-scroll-area-viewport]::-webkit-scrollbar-thumb:hover {
+    background: rgba(156, 163, 175, 0.7);
+  }
+
+  /* Hide scrollbar for elements with scrollbar-hide class */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }

@@ -30,6 +30,13 @@ interface CoursePreviewCardProps {
   isDisabled?: boolean
   isPreview?: boolean
   className?: string
+  mode?: 'vertical' | 'horizontal'
+  nextModule?: {
+    name: string
+    type: 'video' | 'file' | 'quiz'
+    estimatedTime?: number
+  }
+  onContinue?: () => void
 }
 
 export function CoursePreviewCard({ 
@@ -38,7 +45,10 @@ export function CoursePreviewCard({
   completionRate = 0,
   isDisabled = false,
   isPreview = false,
-  className = ""
+  className = "",
+  mode = 'vertical',
+  nextModule,
+  onContinue
 }: CoursePreviewCardProps) {
   const { t } = useTranslation()
   
@@ -56,7 +66,135 @@ export function CoursePreviewCard({
   }
   
   const displayCourse = { ...defaultCourse, ...course }
+
+  // Random icon for categories
+  const categoryIcons = [
+    'mdi:chart-line',
+    'mdi:calculator',
+    'mdi:finance',
+    'mdi:bank',
+    'mdi:currency-usd',
+    'mdi:trending-up'
+  ]
+  const randomIcon = categoryIcons[Math.floor(Math.random() * categoryIcons.length)]
   
+  if (mode === 'horizontal') {
+    return (
+      <div className="w-full">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className={cn(
+            'relative overflow-hidden rounded-xl border bg-card transition-all',
+            isDisabled ? 'opacity-60 pointer-events-none' : 'hover:shadow-lg',
+            className
+          )}
+        >
+          <div className="flex relative">
+            {/* Image Section - Wider */}
+            <div className="relative w-52 h-40 flex-shrink-0 p-3">
+              <div className="relative w-full h-full overflow-hidden rounded-xl bg-gray-50">
+                {displayCourse.picture_url ? (
+                  <Image
+                    src={displayCourse.picture_url}
+                    alt={displayCourse.title}
+                    fill
+                    className="object-cover"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement
+                      target.src = '/default-course.png'
+                    }}
+                  />
+                ) : (
+                  <Image
+                    src="/default-course.png"
+                    alt="Default course image"
+                    fill
+                    className="object-cover"
+                  />
+                )}
+                {/* Category Badge - Smaller */}
+                <Badge 
+                  variant="secondary" 
+                  className="absolute top-2 left-2 bg-foreground/80 text-background backdrop-blur-sm text-xs px-1.5 py-0.5"
+                >
+                  {displayCourse.category?.name}
+                </Badge>
+              </div>
+            </div>
+
+            {/* Content Section */}
+            <div className="flex-1 p-4 flex items-center">
+              <div className="flex-1 space-y-2">
+                {/* Category with icon - Smaller */}
+                <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                  <Icon icon={randomIcon} className="h-3 w-3" />
+                  <span>{displayCourse.category?.name}</span>
+                </div>
+                
+                {/* Title */}
+                <h3 className="text-lg font-semibold line-clamp-1">
+                  {displayCourse.title}
+                </h3>
+                
+                {/* Progress and Button Row */}
+                <div className="flex items-center gap-4">
+                  {/* Progress */}
+                  <div className="flex-1 space-y-1">
+                    <div className="flex items-center gap-2 text-sm">
+                      <span className="text-muted-foreground">{t('course.progress')}:</span>
+                      <span className="font-medium">{userProgress}%</span>
+                    </div>
+                    <Progress value={userProgress} className="h-2" />
+                  </div>
+                  
+                  {/* Continue Button - Aligned with progress */}
+                  <Button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      onContinue?.()
+                    }}
+                    size="sm"
+                    className="whitespace-nowrap"
+                  >
+                    {t('course.continue')}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+        
+        {/* Next Module Section */}
+        {nextModule && (
+          <div className="mt-1 p-3 bg-muted rounded-xl">
+            <div className="flex items-center justify-between text-sm">
+              <div className="flex items-center gap-2">
+                <Icon 
+                  icon={
+                    nextModule.type === 'video' ? 'mdi:play-circle' :
+                    nextModule.type === 'quiz' ? 'mdi:help-circle' :
+                    'mdi:file-document'
+                  } 
+                  className="h-4 w-4 text-muted-foreground"
+                />
+                <span className="text-muted-foreground">{t('course.nextModule')}:</span>
+                <span className="font-medium">{nextModule.name}</span>
+              </div>
+              {nextModule.estimatedTime && (
+                <span className="text-xs text-muted-foreground">
+                  {nextModule.estimatedTime} {t('common.minutes')}
+                </span>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    )
+  }
+  
+  // Default vertical mode
   return (
     <motion.div
       initial={{ opacity: 0 }}

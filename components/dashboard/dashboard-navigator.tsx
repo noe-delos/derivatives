@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { Icon } from "@iconify/react";
 import {
@@ -25,16 +25,26 @@ interface DashboardNavigatorProps {
 export function DashboardNavigator({ dayStreak }: DashboardNavigatorProps) {
   const pathname = usePathname();
 
+  const { t } = useTranslation();
+
   const navItems: NavItem[] = [
-    { name: "Accueil", href: "/dashboard", icon: "material-symbols:home-rounded" },
     {
-      name: "Courses",
+      name: t("dashboard.home"),
+      href: "/dashboard",
+      icon: "material-symbols:home-rounded",
+    },
+    {
+      name: t("common.courses"),
       href: "/dashboard/courses",
       icon: "majesticons:book",
     },
-    { name: "Quizz", href: "/dashboard/quizz", icon: "streamline:controller-1-solid" },
     {
-      name: "Progression",
+      name: t("common.quizzes"),
+      href: "/dashboard/quizz",
+      icon: "streamline:controller-1-solid",
+    },
+    {
+      name: t("common.progression"),
       href: "/dashboard/progression",
       icon: "ri:progress-5-fill",
     },
@@ -55,7 +65,7 @@ export function DashboardNavigator({ dayStreak }: DashboardNavigatorProps) {
   return (
     <div className="w-full border-b">
       <div className="flex items-center justify-between">
-        <nav className="flex h-14 items-center space-x-6 lg:space-x-8 px-4 lg:px-6">
+        <nav className="flex h-12 items-center space-x-6 lg:space-x-8 px-4 lg:px-6">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -70,7 +80,7 @@ export function DashboardNavigator({ dayStreak }: DashboardNavigatorProps) {
               {item.icon && <Icon icon={item.icon} className="h-4 w-4" />}
               {item.name}
               {isActive(item.href) && (
-                <span className="absolute -bottom-[14px] left-0 right-0 h-[2px] bg-primary" />
+                <span className="absolute -bottom-[15px] left-0 right-0 h-[2px] bg-primary" />
               )}
             </Link>
           ))}
